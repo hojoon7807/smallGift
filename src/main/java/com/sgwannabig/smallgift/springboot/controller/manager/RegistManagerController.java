@@ -1,8 +1,10 @@
 package com.sgwannabig.smallgift.springboot.controller.manager;
 
+import com.sgwannabig.smallgift.springboot.config.jwt.JwtProperties;
 import com.sgwannabig.smallgift.springboot.domain.Manager;
 import com.sgwannabig.smallgift.springboot.dto.manager.request.RegistManagerDto;
 import com.sgwannabig.smallgift.springboot.dto.manager.response.RegistManagerResponseDto;
+import com.sgwannabig.smallgift.springboot.service.jwt.JwtTokenProvider;
 import com.sgwannabig.smallgift.springboot.service.manager.RegistManagerCommand;
 import com.sgwannabig.smallgift.springboot.service.manager.RegistManagerUsecase;
 import io.swagger.annotations.ApiImplicitParam;
@@ -14,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,12 +28,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class RegistManagerController {
 
   private final RegistManagerUsecase registManagerUsecase;
+  private final JwtTokenProvider jwtTokenProvider;
 
   @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   @ApiOperation(value = "매니저 등록", notes = "매니저 등록을 위한 정보를 보내준")
   @ApiImplicitParams({
       @ApiImplicitParam(name = "registManager", value = "매니저 등록 정보", required = true, paramType = "body", dataType = "RegistManagerDto"),
-      @ApiImplicitParam(name = "businessRegistration", value = "매니저 등록을 사업자등록증 이미지 파일", required = true,dataType = "__file", paramType = "form"),
+      @ApiImplicitParam(name = "businessRegistration", value = "매니저 등록을 사업자등록증 이미지 파일", required = true, dataType = "__file", paramType = "form"),
       @ApiImplicitParam(name = "mailOrderSalesRegistration", value = "매니저 등록을 통신판매 신고증 이미지 파일", required = true, dataType = "__file", paramType = "form")
   })
   @ApiResponses({
@@ -40,15 +44,21 @@ public class RegistManagerController {
       @ApiResponse(code = 400, message = "잘못된 요청입니다")
   })
   public ResponseEntity<RegistManagerResponseDto> registManager(
+      @RequestHeader(JwtProperties.HEADER_STRING)
+      String token,
       @RequestPart("registManager")
       RegistManagerDto registManagerDto,
       @RequestPart
       MultipartFile businessRegistration,
       @RequestPart
-      MultipartFile mailOrderSalesRegistration){
+      MultipartFile mailOrderSalesRegistration) {
 
+    String email = jwtTokenProvider.getMemberEmail(
+        token.replace(JwtProperties.TOKEN_PREFIX, ""));
+    Manager registManager = registManagerDto.toEntity();
+    registManager.setEmail(email);
     Manager manager = registManagerUsecase.apply(
-        new RegistManagerCommand(registManagerDto.toEntity(), businessRegistration,
+        new RegistManagerCommand(registManager, businessRegistration,
             mailOrderSalesRegistration));
     return ResponseEntity.ok(new RegistManagerResponseDto(manager.getId()));
   }
