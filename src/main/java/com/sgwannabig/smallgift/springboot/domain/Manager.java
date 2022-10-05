@@ -30,7 +30,8 @@ public class Manager extends BaseTimeEntity {
   @OneToMany(mappedBy = "manager")
   private List<SettlementDetails> settlementDetails = new ArrayList<SettlementDetails>();
 
-
+  @Column
+  private String email;
   @Column(nullable = false)
   private String username;
 
