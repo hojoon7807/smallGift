@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Transactional
 public class RegistManagerService implements RegistManagerUsecase {
 
-  private final S3Manager s3Manager;
+  //private final S3Manager s3Manager;
   private final MultiPartUtil multiPartUtil;
   private final ManagerRepository managerRepository;
 
@@ -26,9 +26,12 @@ public class RegistManagerService implements RegistManagerUsecase {
     MultipartFile businessRegistration = registManagerCommand.getBusinessRegistration();
     MultipartFile mailOrderSalesRegistration = registManagerCommand.getMailOrderSalesRegistration();
 
-    String businessRegistrationUrl = getUploadFileUrl(businessRegistration, FileDir.REGIST_MANAGER);
-    String mailOrderSalesRegistrationUrl = getUploadFileUrl(mailOrderSalesRegistration,
-        FileDir.REGIST_MANAGER);
+//    String businessRegistrationUrl = getUploadFileUrl(businessRegistration, FileDir.REGIST_MANAGER);
+//    String mailOrderSalesRegistrationUrl = getUploadFileUrl(mailOrderSalesRegistration,
+//        FileDir.REGIST_MANAGER);
+
+    String businessRegistrationUrl = "businessRegistrationUrl";
+    String mailOrderSalesRegistrationUrl = "mailOrderSalesRegistrationUrl";
 
     Manager manager = registManagerCommand.getManager();
 
@@ -38,8 +41,8 @@ public class RegistManagerService implements RegistManagerUsecase {
     return managerRepository.save(manager);
   }
 
-  private String getUploadFileUrl(MultipartFile file, FileDir fileDir) {
-    return s3Manager.uploadFile(file, multiPartUtil.setObjectMetaData(file),
-        multiPartUtil.createFilePath(fileDir, file.getContentType()));
-  }
+//  private String getUploadFileUrl(MultipartFile file, FileDir fileDir) {
+//    return s3Manager.uploadFile(file, multiPartUtil.setObjectMetaData(file),
+//        multiPartUtil.createFilePath(fileDir, file.getContentType()));
+//  }
 }

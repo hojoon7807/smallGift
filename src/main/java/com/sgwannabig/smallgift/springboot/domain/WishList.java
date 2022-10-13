@@ -4,6 +4,9 @@ package com.sgwannabig.smallgift.springboot.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Value;
 
 
 /*
@@ -11,7 +14,8 @@ import javax.persistence.*;
     유저는 여러 상품을 찜 할 수 있고, 찜이 된 상품의 정보를 갖고있다.
  */
 @Entity
-@Data
+@Getter
+@Setter
 public class WishList extends BaseTimeEntity {      //생성 및 수정일은 BaseTimeEntity를 통해 관리
 
     //id로 관리하기 위해 적은것.

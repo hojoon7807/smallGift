@@ -175,9 +175,9 @@ public class ShopInfoController {
 
             shopDetailsResDto.setShopInfoDetailDto(ShopInfoDetailDto.builder()
                     .businessHours(shop.getBusinessHours())
-                    .createShopDate(shop.getCreateShopDate())
+                    .createShopDate(shop.getCreateDate())
                     .id(shop.getId())
-                    .isAllowed(shop.isAllowed())
+                    //.isAllowed(shop.isAllowed())
                     .shopAddress(shop.getShopAddress())
                     .shopName(shop.getShopName())
                     .shopTelephone(shop.getShopTelephone())

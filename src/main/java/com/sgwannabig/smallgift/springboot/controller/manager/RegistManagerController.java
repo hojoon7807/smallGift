@@ -2,11 +2,14 @@ package com.sgwannabig.smallgift.springboot.controller.manager;
 
 import com.sgwannabig.smallgift.springboot.config.jwt.JwtProperties;
 import com.sgwannabig.smallgift.springboot.domain.Manager;
+import com.sgwannabig.smallgift.springboot.domain.Shop;
 import com.sgwannabig.smallgift.springboot.dto.manager.request.RegistManagerDto;
 import com.sgwannabig.smallgift.springboot.dto.manager.response.RegistManagerResponseDto;
 import com.sgwannabig.smallgift.springboot.service.jwt.JwtTokenProvider;
 import com.sgwannabig.smallgift.springboot.service.manager.RegistManagerCommand;
 import com.sgwannabig.smallgift.springboot.service.manager.RegistManagerUsecase;
+import com.sgwannabig.smallgift.springboot.service.shop.RegistShopCommand;
+import com.sgwannabig.smallgift.springboot.service.shop.RegistShopUsecase;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -28,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class RegistManagerController {
 
   private final RegistManagerUsecase registManagerUsecase;
+  private final RegistShopUsecase registShopUsecase;
   private final JwtTokenProvider jwtTokenProvider;
 
   @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -53,6 +57,7 @@ public class RegistManagerController {
       @RequestPart
       MultipartFile mailOrderSalesRegistration) {
 
+    //Security Context 사용 방법으로 변경 고려
     String email = jwtTokenProvider.getMemberEmail(
         token.replace(JwtProperties.TOKEN_PREFIX, ""));
     Manager registManager = registManagerDto.toEntity();
@@ -60,6 +65,7 @@ public class RegistManagerController {
     Manager manager = registManagerUsecase.apply(
         new RegistManagerCommand(registManager, businessRegistration,
             mailOrderSalesRegistration));
-    return ResponseEntity.ok(new RegistManagerResponseDto(manager.getId()));
+    Shop shop = registShopUsecase.apply(new RegistShopCommand(manager));
+    return ResponseEntity.ok(new RegistManagerResponseDto(manager.getId(), shop.getId()));
   }
 }
