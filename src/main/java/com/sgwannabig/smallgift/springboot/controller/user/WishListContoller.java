@@ -139,7 +139,7 @@ public class WishListContoller {
         wishListRepository.save(wishList);
 
         //상품의 좋아요를 한개 늘린다.
-        productById.get().setLikeCount(productById.get().getLikeCount()+1);
+//        productById.get().setLikeCount(productById.get().getLikeCount()+1);
 
         //상점의 누적 좋아요를 한개 늘린다.
         shopByProductId.get().setTotalLike(shopByProductId.get().getTotalLike()+1);
@@ -176,7 +176,7 @@ public class WishListContoller {
             Optional<Shop> shopOptional = shopRepository.findById(product.getShop().getId());
 
             //1개 감소
-            product.setLikeCount(product.getLikeCount() - 1);
+//            product.setLikeCount(product.getLikeCount() - 1);
 
             shopOptional.ifPresent( shop -> {
                 shop.setTotalLike(shop.getTotalLike() - 1);

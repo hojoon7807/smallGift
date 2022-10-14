@@ -61,10 +61,10 @@ public class SalesStatusService {
             discountPriceSum += product.getDiscountPrice();
 
             SalesInfo salesInfo = new SalesInfo();
-            salesInfo.setSalesDate(product.getCreateDate());
+            //salesInfo.setSalesDate(product.getCreateDate());
             salesInfo.setProductName(product.getProductName());
             salesInfo.setProductPrice(product.getProductPrice());
-            salesInfo.setProductBuyer(product.getProductBuyer());
+            //salesInfo.setProductBuyer(product.getProductBuyer());
             infoList.add(salesInfo);
         }
 

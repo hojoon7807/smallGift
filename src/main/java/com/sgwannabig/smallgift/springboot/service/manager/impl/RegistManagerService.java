@@ -5,8 +5,8 @@ import com.sgwannabig.smallgift.springboot.repository.ManagerRepository;
 import com.sgwannabig.smallgift.springboot.service.manager.RegistManagerCommand;
 import com.sgwannabig.smallgift.springboot.service.manager.RegistManagerUsecase;
 import com.sgwannabig.smallgift.springboot.util.FileDir;
-import com.sgwannabig.smallgift.springboot.util.MultiPartUtil;
-import com.sgwannabig.smallgift.springboot.util.aws.S3Manager;
+//import com.sgwannabig.smallgift.springboot.util.MultiPartUtil;
+//import com.sgwannabig.smallgift.springboot.util.aws.S3Manager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class RegistManagerService implements RegistManagerUsecase {
 
   //private final S3Manager s3Manager;
-  private final MultiPartUtil multiPartUtil;
+  //private final MultiPartUtil multiPartUtil;
   private final ManagerRepository managerRepository;
 
   @Override

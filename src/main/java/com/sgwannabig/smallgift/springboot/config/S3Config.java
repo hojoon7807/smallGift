@@ -1,36 +1,36 @@
-package com.sgwannabig.smallgift.springboot.config;
-
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-@Configuration
-class S3Config {
-
-//  @Value("${cloud.aws.credentials.access-key}")
-//  private String accessKey;
+//package com.sgwannabig.smallgift.springboot.config;
 //
-//  @Value("${cloud.aws.credentials.secret-key}")
-//  private String secretKey;
+//import com.amazonaws.auth.AWSStaticCredentialsProvider;
+//import com.amazonaws.auth.BasicAWSCredentials;
+//import com.amazonaws.services.s3.AmazonS3;
+//import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+//import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
 //
-//  @Value("${cloud.aws.region.static}")
-//  private String region;
+//@Configuration
+//class S3Config {
 //
-//  @Bean
-//  public BasicAWSCredentials basicAWSCredentials() {
-//    return new BasicAWSCredentials(accessKey, secretKey);
-//  }
-//
-//  @Bean
-//  public AmazonS3 amazonS3Client() {
-//    return AmazonS3ClientBuilder
-//        .standard()
-//        .withCredentials(new AWSStaticCredentialsProvider(basicAWSCredentials()))
-//        .withRegion(region)
-//        .build();
-//  }
-}
+////  @Value("${cloud.aws.credentials.access-key}")
+////  private String accessKey;
+////
+////  @Value("${cloud.aws.credentials.secret-key}")
+////  private String secretKey;
+////
+////  @Value("${cloud.aws.region.static}")
+////  private String region;
+////
+////  @Bean
+////  public BasicAWSCredentials basicAWSCredentials() {
+////    return new BasicAWSCredentials(accessKey, secretKey);
+////  }
+////
+////  @Bean
+////  public AmazonS3 amazonS3Client() {
+////    return AmazonS3ClientBuilder
+////        .standard()
+////        .withCredentials(new AWSStaticCredentialsProvider(basicAWSCredentials()))
+////        .withRegion(region)
+////        .build();
+////  }
+//}

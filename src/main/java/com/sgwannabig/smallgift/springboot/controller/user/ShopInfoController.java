@@ -2,6 +2,7 @@ package com.sgwannabig.smallgift.springboot.controller.user;
 
 
 import com.sgwannabig.smallgift.springboot.domain.Product;
+import com.sgwannabig.smallgift.springboot.domain.ProductStatus;
 import com.sgwannabig.smallgift.springboot.domain.Shop;
 import com.sgwannabig.smallgift.springboot.dto.KeyValueDto;
 import com.sgwannabig.smallgift.springboot.dto.shop.*;
@@ -191,15 +192,15 @@ public class ShopInfoController {
                     Product product = shopList.get(i);
                     shopDetailsResDto.getShopAllByLocate().add(new KeyValueDto<>(i, ProductInfoDto.builder()
                             .category(product.getCategory())
-                            .createDate(product.getCreateDate())
+                            //.createDate(product.getCreateDate())
                             .discountPrice(product.getDiscountPrice())
-                            .endDate(product.getEndDate())
+                            .endDate("product.getEndDate()")
                             .id(product.getId())
                             .productName(product.getProductName())
                             .productPrice(product.getProductPrice())
                             .productStock(product.getProductStock())
-                            .status(product.getStatus())
-                            .startDate(product.getStartDate())
+                            .status(1)
+                            .startDate("product.getStartDate()")
                             .build()));
                 });
             });
