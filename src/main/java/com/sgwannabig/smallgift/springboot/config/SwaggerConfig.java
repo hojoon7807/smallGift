@@ -49,6 +49,20 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo(title, version));
     }
 
+    @Bean
+    public Docket apiV3() {
+        version = "PRODUCT";
+        title = "REST API ";
+        return new Docket(DocumentationType.SWAGGER_2)
+            .useDefaultResponseMessages(false)
+            .groupName(version)
+            .select()
+            .apis(RequestHandlerSelectors.basePackage("com.sgwannabig.smallgift.springboot.controller"))
+            .paths(PathSelectors.ant("/api/**/products/**"))
+            .build()
+            .apiInfo(apiInfo(title, version));
+    }
+
     private ApiInfo apiInfo(String title, String version) {
         return new ApiInfo(
                 title,
